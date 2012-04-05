@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TimeManagerModelStoreContainer" CdmEntityContainer="TimeManagerContext">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="TimeManagerModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdProject" ColumnName="IdProject" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="TimeManagerModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="TimeManagerModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="WorkedHours" ColumnName="WorkedHours" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="Started" ColumnName="Started" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

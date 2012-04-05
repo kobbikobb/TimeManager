@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TimeManagerModelStoreContainer">
+          <EntitySet Name="Category" EntityType="TimeManagerModel.Store.Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Project" EntityType="TimeManagerModel.Store.Project" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Task" EntityType="TimeManagerModel.Store.Task" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Category_Project" Association="TimeManagerModel.Store.FK_Category_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Category" Association="TimeManagerModel.Store.FK_Task_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdProject" Type="numeric" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategory" Type="numeric" Nullable="false" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="Started" Type="datetime" Nullable="false" />
+          <Property Name="Completed" Type="datetime" />
+          <Property Name="WorkedHours" Type="decimal" Nullable="false" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Category_Project">
+          <End Role="Project" Type="TimeManagerModel.Store.Project" Multiplicity="1" />
+          <End Role="Category" Type="TimeManagerModel.Store.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="IdProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Category">
+          <End Role="Category" Type="TimeManagerModel.Store.Category" Multiplicity="1" />
+          <End Role="Task" Type="TimeManagerModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TimeManagerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TimeManagerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="TimeManagerModel.Category" />
+          <EntitySet Name="Projects" EntityType="TimeManagerModel.Project" />
+          <AssociationSet Name="FK_Category_Project" Association="TimeManagerModel.FK_Category_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <EntitySet Name="Tasks" EntityType="TimeManagerModel.Task" />
+          <AssociationSet Name="FK_Task_Category" Association="TimeManagerModel.FK_Task_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProject" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Project" Relationship="TimeManagerModel.FK_Category_Project" FromRole="Category" ToRole="Project" />
+          <NavigationProperty Name="Tasks" Relationship="TimeManagerModel.FK_Task_Category" FromRole="Category" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Categories" Relationship="TimeManagerModel.FK_Category_Project" FromRole="Project" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Category_Project">
+          <End Role="Project" Type="TimeManagerModel.Project" Multiplicity="1" />
+          <End Role="Category" Type="TimeManagerModel.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="IdProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="IdCategory" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Started" Nullable="false" />
+          <Property Type="DateTime" Name="Completed" />
+          <Property Type="Decimal" Name="WorkedHours" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Category" Relationship="TimeManagerModel.FK_Task_Category" FromRole="Task" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Task_Category">
+          <End Type="TimeManagerModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="TimeManagerModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TimeManagerModelStoreContainer" CdmEntityContainer="TimeManagerContext">
+          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="TimeManagerModel.Category"><MappingFragment StoreEntitySet="Category">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdProject" ColumnName="IdProject" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Projects"><EntityTypeMapping TypeName="TimeManagerModel.Project"><MappingFragment StoreEntitySet="Project">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TimeManagerModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="WorkedHours" ColumnName="WorkedHours" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Started" ColumnName="Started" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TimeManagerModel">
+        <EntityTypeShape EntityType="TimeManagerModel.Category" Width="1.5" PointX="3" PointY="1.125" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeManagerModel.Project" Width="1.5" PointX="0.75" PointY="1.375" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="TimeManagerModel.FK_Category_Project" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.172841796875" />
+          <ConnectorPoint PointX="3" PointY="2.172841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="TimeManagerModel.Task" Width="1.5" PointX="5.25" PointY="0.875" Height="2.3648893229166656" />
+        <AssociationConnector Association="TimeManagerModel.FK_Task_Category" >
+          <ConnectorPoint PointX="4.5" PointY="2.1151432291666667" />
+          <ConnectorPoint PointX="5.25" PointY="2.1151432291666667" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

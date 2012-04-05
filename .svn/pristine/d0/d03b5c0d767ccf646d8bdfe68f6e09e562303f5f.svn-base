@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using PatternLib;
+using TimeManagerLib.Model;
+
+namespace TimeManagerLib.ViewModel
+{
+    public class UncompletedTasksViewModel : ATasksViewModel
+    {
+        public override IList<Model.Task> GetTasks()
+        {
+            var repository = DependencyResolver.Resolve<ITimeManagerRepository>();
+            return repository.GetUncompletedTasks();
+        }
+    }
+}

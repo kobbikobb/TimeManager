@@ -1,0 +1,5 @@
+<Modules>
+  <Module PersistentId="CF3C1CC1-114C-498C-8686-2CF58CC676FD" ModuleId="TimeManagerLib" />
+  <Module PersistentId="8D69E54B-728B-4A58-8FA6-4555FF0EAE71" ModuleId="TimeManagerTests" />
+  <Module PersistentId="6A3A72AA-7767-414F-AA3E-841F68163FAA" ModuleId="TimeManager" />
+</Modules>

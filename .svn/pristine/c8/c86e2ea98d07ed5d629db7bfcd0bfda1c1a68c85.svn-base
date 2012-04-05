@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="TimeManagerLib.View.WorkbookView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="MainDictionary.xaml"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0">
+            <TextBlock Text="Filter:" Width="100" VerticalAlignment="Center"/>
+            <CheckBox Content="Completed tasks" Margin="6,0,0,0" IsChecked="{Binding ShowCompletedTasks}" />
+            <CheckBox Content="Uncompleted tasks" IsChecked="{Binding ShowUncompletedTasks}" Margin="6,0,0,0"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1" Margin="0,3,0,0">
+            <TextBlock Text="Grouping:" Width="100"/>
+            <RadioButton Content="None" IsChecked="{Binding NoGrouping}" Margin="6,0,0,0"/>
+            <RadioButton Content="Started" IsChecked="{Binding GroupByStarted}" Margin="6,0,0,0"/>
+            <RadioButton Content="Project" IsChecked="{Binding GroupByProject}" Margin="6,0,0,0"/>
+            <RadioButton Content="Project category" IsChecked="{Binding GroupByCategory}" Margin="6,0,0,0"/>
+        </DockPanel>
+        
+        <DataGrid Grid.Row="2" Margin="0,6,0,0" RowHeaderWidth="0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                     ItemsSource="{Binding Tasks}" SelectedItem="{Binding Task}" DisplayMemberPath="Description">
+
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteTaskCommand}"/>
+            </DataGrid.InputBindings>
+
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Name}" />
+                                                    <TextBlock Margin="6,0,0,0" Text="- Count: "/>
+                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Path=ItemCount}"/>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Width="90" Header="Started" 
+                                        Binding="{Binding Started, Converter={StaticResource dateTimeConverter}}" />
+
+                <DataGridTextColumn Width="90" Header="Completed" 
+                                        Binding="{Binding Completed, Converter={StaticResource dateTimeConverter}}" />
+                
+                <DataGridTemplateColumn Width="20">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <CheckBox VerticalAlignment="Top" HorizontalAlignment="Center" IsChecked="{Binding IsCompleted, UpdateSourceTrigger=PropertyChanged}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Width="40" Header="Min" Binding="{Binding WorkedMinutes}" />
+
+                <DataGridTextColumn Width="90" Header="Project" 
+                                        Binding="{Binding ProjectName}" />
+
+                <DataGridTextColumn Width="90" Header="Category" 
+                                        Binding="{Binding CategoryName}" />
+
+                <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}" />
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+    
+</UserControl>
