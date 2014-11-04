@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TimeManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="TimeManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="TimeManagerModelStoreContainer">
-          <EntitySet Name="Category" EntityType="TimeManagerModel.Store.Category" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Project" EntityType="TimeManagerModel.Store.Project" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Task" EntityType="TimeManagerModel.Store.Task" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Category" EntityType="TimeManagerModel.Store.Category" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Project" EntityType="TimeManagerModel.Store.Project" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Task" EntityType="TimeManagerModel.Store.Task" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_Category_Project" Association="TimeManagerModel.Store.FK_Category_Project">
             <End Role="Project" EntitySet="Project" />
             <End Role="Category" EntitySet="Category" />
@@ -71,8 +71,8 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TimeManagerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="TimeManagerContext" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="TimeManagerModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="TimeManagerContext" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="Categories" EntityType="TimeManagerModel.Category" />
           <EntitySet Name="Projects" EntityType="TimeManagerModel.Project" />
           <AssociationSet Name="FK_Category_Project" Association="TimeManagerModel.FK_Category_Project">
@@ -89,7 +89,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="IdProject" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Project" Relationship="TimeManagerModel.FK_Category_Project" FromRole="Category" ToRole="Project" />
@@ -99,7 +99,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Categories" Relationship="TimeManagerModel.FK_Category_Project" FromRole="Project" ToRole="Category" />
         </EntityType>
@@ -119,7 +119,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Decimal" Name="IdCategory" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="Started" Nullable="false" />
@@ -143,7 +143,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TimeManagerModelStoreContainer" CdmEntityContainer="TimeManagerContext">
           <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="TimeManagerModel.Category"><MappingFragment StoreEntitySet="Category">
             <ScalarProperty Name="Id" ColumnName="Id" />
@@ -171,7 +171,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -195,7 +195,7 @@
           <ConnectorPoint PointX="3" PointY="2.172841796875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="TimeManagerModel.Task" Width="1.5" PointX="5.25" PointY="0.875" Height="2.3648893229166656" />
-        <AssociationConnector Association="TimeManagerModel.FK_Task_Category" >
+        <AssociationConnector Association="TimeManagerModel.FK_Task_Category">
           <ConnectorPoint PointX="4.5" PointY="2.1151432291666667" />
           <ConnectorPoint PointX="5.25" PointY="2.1151432291666667" />
         </AssociationConnector>
