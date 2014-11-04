@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using PatternLib;
@@ -194,6 +195,16 @@ namespace TimeManagerLib.ViewModel
         public override string ToString()
         {
             return "Start task";
+        }
+
+        public void SelectProject(decimal id)
+        {
+            Project = Projects.Single(x => x.Id == id);
+        }
+
+        public void SelectCategory(decimal id)
+        {
+            Category = Categories.Single(x => x.Id == id);
         }
     }
 }

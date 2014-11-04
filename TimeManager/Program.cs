@@ -29,19 +29,29 @@ namespace TimeManager
         [STAThread]
         public static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             try
             {
-                var repository = new TimeManagerRepositoryFake();
+                var timeManagerRepository = new TimeManagerRepositoryFake();
 
-                DependencyResolver.Register(repository);
-  
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Tray());
+                DependencyResolver.Register(timeManagerRepository);
+
+                var startTaskAction = new StartTaskAction();
+                var viewWorkbookAction = new ViewWorkbookAction();
+                var tray = new Tray(startTaskAction, viewWorkbookAction);
+
+                var taskAutomation = new TaskAutomation(timeManagerRepository, startTaskAction);
+                var machineStatusTaskAutomation = new MachineStatusTaskAutomation(taskAutomation);
+                var timeoutTaskAutomation = new TimeoutTaskAutomation(taskAutomation);
+
+                machineStatusTaskAutomation.StartAutomation();
+                timeoutTaskAutomation.StartAutomation();
+                Application.Run(tray);
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteException(ex);
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
