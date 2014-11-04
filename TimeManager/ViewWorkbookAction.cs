@@ -33,12 +33,10 @@ namespace TimeManager
             }
 
             window.DataContext = workbookViewModelFactory.CreateViewModel();
-            window.Show();
-            window.Closing += (sender, args) =>
-            {
-                window = null;
-            };
-            System.Windows.Threading.Dispatcher.Run();
+            window.ShowDialog();
+            window = null;
+
+            //Can use Show and Dispatcher.Run here
         }
     }
 }

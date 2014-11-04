@@ -37,13 +37,11 @@ namespace TimeManager
             var startTaskViewModel = CreateStartTaskViewModel();
 
             window.DataContext = startTaskViewModel;
-            window.Show();
-            window.Closing += (sender, args) =>
+            if(window.ShowDialog() == true)
             {
                 lastStartTaskViewModel = startTaskViewModel;
-                window = null;
             };
-            System.Windows.Threading.Dispatcher.Run();
+            window = null;
         }
 
         private StartTaskViewModel CreateStartTaskViewModel()
