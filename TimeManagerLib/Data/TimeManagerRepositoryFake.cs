@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TimeManagerLib.Model;
+using TimeManager.Core;
+using TimeManager.Core.Repositories;
 
 namespace TimeManagerLib.Data
 {

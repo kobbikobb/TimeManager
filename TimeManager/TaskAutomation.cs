@@ -1,5 +1,5 @@
 ﻿using System;
-using TimeManagerLib.Model;
+using TimeManager.Core.Repositories;
 
 namespace TimeManager
 {

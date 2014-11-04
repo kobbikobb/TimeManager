@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using TimeManagerLib.Model;
+using TimeManager.Core;
+using TimeManager.Core.Repositories;
 using GalaSoft.MvvmLight;
 
 namespace TimeManagerLib.ViewModel

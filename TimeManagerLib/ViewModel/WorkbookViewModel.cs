@@ -4,7 +4,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Microsoft.Practices.Prism.Commands;
-using TimeManagerLib.Model;
+using TimeManager.Core;
+using TimeManager.Core.Repositories;
 using TimeManagerLib.ViewModel.Extension;
 
 namespace TimeManagerLib.ViewModel

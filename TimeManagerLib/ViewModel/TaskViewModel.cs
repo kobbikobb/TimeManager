@@ -1,6 +1,7 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
-using TimeManagerLib.Model;
+using TimeManager.Core;
+using TimeManager.Core.Repositories;
 
 namespace TimeManagerLib.ViewModel
 {

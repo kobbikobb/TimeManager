@@ -88,21 +88,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\TimeManagerModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeManagerModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Data\TimeManagerRepositoryFake.cs" />
     <Compile Include="Helpers\Logger.cs" />
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\IRefreashable.cs" />
-    <Compile Include="Model\Project.cs" />
-    <Compile Include="Model\Task.cs" />
-    <Compile Include="Data\TimeManagerContext.cs" />
-    <Compile Include="Data\TimeManagerRepository.cs" />
-    <Compile Include="Model\DataIntegrityException.cs" />
-    <Compile Include="Model\ITimeManagerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -143,10 +130,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.Config" />
-    <EntityDeploy Include="Data\TimeManagerModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TimeManagerModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,13 +137,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\TimeManager.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\TimeManager_log.ldf">
-      <DependentUpon>TimeManager.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\clock.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +188,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeManager.Core\TimeManager.Core.csproj">
+      <Project>{10aeef40-5c6a-4683-b8cb-f4ea00cb896a}</Project>
+      <Name>TimeManager.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

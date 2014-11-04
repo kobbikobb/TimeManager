@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GalaSoft.MvvmLight;
-using TimeManagerLib.Model;
+﻿using GalaSoft.MvvmLight;
+using TimeManager.Core;
 
 namespace TimeManagerLib.ViewModel
 {

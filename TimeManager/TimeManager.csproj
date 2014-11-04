@@ -164,6 +164,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TimeManager.Core\TimeManager.Core.csproj">
+      <Project>{10aeef40-5c6a-4683-b8cb-f4ea00cb896a}</Project>
+      <Name>TimeManager.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TimeManagerLib\TimeManagerLib.csproj">
       <Project>{cf3c1cc1-114c-498c-8686-2cf58cc676fd}</Project>
       <Name>TimeManagerLib</Name>

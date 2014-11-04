@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Windows.Forms;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
+using TimeManager.Core.Repositories;
 using TimeManagerLib.Data;
-using TimeManagerLib.Model;
 using TimeManagerLib.ViewModel;
 using Application = System.Windows.Forms.Application;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace TimeManager
 {
