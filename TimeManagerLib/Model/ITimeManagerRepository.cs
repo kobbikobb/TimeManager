@@ -22,7 +22,5 @@ namespace TimeManagerLib.Model
 
         void SaveTask(Task task);
         void DeleteTask(Task task);
-
-        void TestConnection();
     }
 }

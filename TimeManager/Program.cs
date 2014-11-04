@@ -31,28 +31,10 @@ namespace TimeManager
         {
             try
             {
-                var mdfPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\TimeManager\TimeManager.mdf";
-                if(!File.Exists(mdfPath))
-                    throw new Exception("Database file not found: " + mdfPath);
-
-                var builder = new SqlConnectionStringBuilder();
-                builder.DataSource = @".\SQLEXPRESS";
-                builder.IntegratedSecurity = true;
-                builder.ConnectTimeout = 30;
-                builder.UserInstance = true;
-                builder.AttachDBFilename = mdfPath;
-
-                var sqlConnection = new SqlConnection(builder.ToString());
-                var repository = new TimeManagerRepository(sqlConnection);
+                var repository = new TimeManagerRepositoryFake();
 
                 DependencyResolver.Register(repository);
-                
-                #region Trix til að auka hraðan, fyrst er hægt að kalla í gagnagrunninn
-
-                repository.TestConnection();
- 
-                #endregion
-
+  
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Tray());

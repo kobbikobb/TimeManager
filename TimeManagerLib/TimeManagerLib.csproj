@@ -93,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeManagerModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\TimeManagerRepositoryFake.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\IRefreashable.cs" />

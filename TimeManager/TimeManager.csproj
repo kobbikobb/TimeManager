@@ -133,12 +133,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TimeManagerLib\TimeManagerLib.csproj">
-      <Project>{CF3C1CC1-114C-498C-8686-2CF58CC676FD}</Project>
-      <Name>TimeManagerLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
@@ -159,6 +153,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeManagerLib\TimeManagerLib.csproj">
+      <Project>{cf3c1cc1-114c-498c-8686-2cf58cc676fd}</Project>
+      <Name>TimeManagerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -49,14 +49,6 @@ namespace TimeManagerLib.Data
 
         #endregion
 
-        public void TestConnection()
-        {
-            using(var gögn = GetDataContext())
-            {
-                var project = gögn.Projects.FirstOrDefault();
-            }
-        }
-
         #region Data getters
 
         public List<Project> GetProjects()
