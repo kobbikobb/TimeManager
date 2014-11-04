@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimeManager.exe" size="19968">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimeManager.exe" size="19456">
       <assemblyIdentity name="TimeManager" version="1.1.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XLOeHeET0q7LrNSU1zB8uhHEg3w=</dsig:DigestValue>
+        <dsig:DigestValue>oTtSxN/Bl6fatE0UQ5evZdZDdsc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ySuTa9U4PSgV7O4R1AzfqqUGZ9Y=</dsig:DigestValue>
+        <dsig:DigestValue>KiLGMDOJij6DbxG70lu/Xv75k30=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

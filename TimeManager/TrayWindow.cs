@@ -33,7 +33,7 @@ namespace TimeManager
             get { return _window != null && _window.IsVisible; }
         }
 
-        public bool Show(ViewModelBase viewModel, int windowHeight = 600, int windowWidth = 860)
+        public bool Show(ViewModelBase viewModel)
         {
             if(_window == null)
                 _window = new WindowView();
@@ -53,8 +53,6 @@ namespace TimeManager
                 return false;
             }
 
-            _window.Height = windowHeight;
-            _window.Width = windowWidth;
             _window.Title = viewModel.ToString();
             _window.DataContext = viewModel;
 

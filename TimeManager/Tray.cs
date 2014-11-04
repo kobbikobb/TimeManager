@@ -135,7 +135,7 @@ namespace TimeManager
                         viewModel.Category = viewModel.Categories.SingleOrDefault(x => x.Id == _lastStartTaskViewModel.Category.Id);
                 }
 
-                if (TrayWindow.Instance.Show(viewModel, 300, 450))
+                if (TrayWindow.Instance.Show(viewModel))
                 {
                     _lastStartTaskViewModel = viewModel;
                 }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Avalon="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
              xmlns:Behaviors="clr-namespace:TimeManagerLib.View.Behaviors"
+             Width="400"
              mc:Ignorable="d">
 
 
