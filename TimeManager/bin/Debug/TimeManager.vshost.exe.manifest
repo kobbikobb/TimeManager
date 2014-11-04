@@ -43,18 +43,6 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AvalonControlsLibrary.dll" size="126464">
-      <assemblyIdentity name="AvalonControlsLibrary" version="2.0.0.0" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>jhz95D5Jv1kp+pXG+KsXdh8UxEo=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GalaSoft.MvvmLight.WPF4.dll" size="21504">
       <assemblyIdentity name="GalaSoft.MvvmLight.WPF4" version="3.0.0.29166" publicKeyToken="30359002188BF5B0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -110,7 +98,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>m58rjYqatxpf5Ntm3ZvImoN2xyk=</dsig:DigestValue>
+        <dsig:DigestValue>ZRrQEI0yV1yqtnHmYEwaqA0ho2c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>pPmqssmsiJlOWR9cRJhFt2F0III=</dsig:DigestValue>
+        <dsig:DigestValue>qXtVI9qmIWygdJyEwJs4r8iN6lk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

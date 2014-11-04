@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\Lenovo.Lenovo-THINK.000\Documents\Visual Studio 2010\Projects\TimeManager\TimeManagerLib\obj\Debug\
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerLib\obj\Debug\
 TimeManagerLib
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 4481408130
 2-496551934
-282062308824
-20-1629617710
+28141271307
+201458847562
 View\MainDictionary.xaml;View\StartTaskView.xaml;View\WindowView.xaml;View\WorkbookView.xaml;
 
 True

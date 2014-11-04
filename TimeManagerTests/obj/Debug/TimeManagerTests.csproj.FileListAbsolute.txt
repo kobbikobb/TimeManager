@@ -12,3 +12,17 @@ C:\Users\Lenovo.Lenovo-THINK.000\Documents\Visual Studio 2010\Projects\TimeManag
 C:\Users\Lenovo.Lenovo-THINK.000\Documents\Visual Studio 2010\Projects\TimeManager\TimeManagerTests\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Lenovo.Lenovo-THINK.000\Documents\Visual Studio 2010\Projects\TimeManager\TimeManagerTests\obj\Debug\TimeManagerTests.dll
 C:\Users\Lenovo.Lenovo-THINK.000\Documents\Visual Studio 2010\Projects\TimeManager\TimeManagerTests\obj\Debug\TimeManagerTests.pdb
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\Data\TimeManager.mdf
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\Data\TimeManager_log.ldf
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\TimeManagerTests.dll.config
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\TimeManagerTests.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\TimeManagerTests.pdb
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\TimeManagerLib.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\GalaSoft.MvvmLight.WPF4.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\Microsoft.Practices.Prism.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\PatternLib.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\bin\Debug\TimeManagerLib.pdb
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\obj\Debug\TimeManagerTests.csprojResolveAssemblyReference.cache
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\obj\Debug\TimeManagerTests.dll
+C:\Users\Jakob\Documents\GitHub\TimeManager\TimeManagerTests\obj\Debug\TimeManagerTests.pdb
