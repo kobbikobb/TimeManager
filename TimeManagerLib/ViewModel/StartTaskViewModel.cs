@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using PatternLib;
 using TimeManagerLib.Model;
-using TimeManagerLib.Data;
 using GalaSoft.MvvmLight;
-using TimeManagerLib.ViewModel.Extension;
 
 namespace TimeManagerLib.ViewModel
 {
     public class StartTaskViewModel : ViewModelBase, IRefreashable
     {
+        private readonly ITimeManagerRepository timeManagerRepository;
         public Task NewTask { get; private set; }
 
-        public StartTaskViewModel()
+        public StartTaskViewModel(ITimeManagerRepository timeManagerRepository)
         {
-
+            if (timeManagerRepository == null) throw new ArgumentNullException("timeManagerRepository");
+            this.timeManagerRepository = timeManagerRepository;
         }
 
         #region Properties
@@ -78,8 +77,7 @@ namespace TimeManagerLib.ViewModel
             {
                 if(_projects == null)
                 {
-                    var repository = DependencyResolver.Resolve<ITimeManagerRepository>();
-                    _projects = repository.GetProjects();
+                    _projects = timeManagerRepository.GetProjects();
                 }
                return _projects;
             }
@@ -100,8 +98,7 @@ namespace TimeManagerLib.ViewModel
                 if (_project != null)
                 {
                     //Here we have to load the project categories
-                    var repository = DependencyResolver.Resolve<ITimeManagerRepository>();
-                    Categories = repository.GetProjectCategories(_project);
+                    Categories = timeManagerRepository.GetProjectCategories(_project);
                 }
                 else
                 {
@@ -176,8 +173,7 @@ namespace TimeManagerLib.ViewModel
 
             task.WorkedHours = WorkedHours;
 
-            var repository = DependencyResolver.Resolve<ITimeManagerRepository>();
-            repository.SaveTask(task);
+            timeManagerRepository.SaveTask(task);
 
             NewTask = task;
         }

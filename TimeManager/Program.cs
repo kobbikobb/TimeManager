@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows;
 using System.Windows.Forms;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using PatternLib;
-using TimeManager.Properties;
+using Castle.Facilities.TypedFactory;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
+using Castle.Windsor;
 using TimeManagerLib.Data;
-using TimeManagerLib.Helpers;
 using TimeManagerLib.Model;
-using TimeManagerLib.View;
 using TimeManagerLib.ViewModel;
-using TimeManagerLib.ViewModel.Extension;
 using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -32,27 +23,32 @@ namespace TimeManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            try
+            using (var container = new WindsorContainer())
             {
-                var timeManagerRepository = new TimeManagerRepositoryFake();
+                container.AddFacility<TypedFactoryFacility>();
+                container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
 
-                DependencyResolver.Register(timeManagerRepository);
+                container.Register(Component.For<ITimeManagerRepository>().ImplementedBy<TimeManagerRepositoryFake>());
 
-                var startTaskAction = new StartTaskAction();
-                var viewWorkbookAction = new ViewWorkbookAction();
-                var tray = new Tray(startTaskAction, viewWorkbookAction);
+                container.Register(Component.For<StartTaskViewModel>().LifestyleTransient());
+                container.Register(Component.For<WorkbookViewModel>().LifestyleTransient());
+                container.Register(Component.For<IStartTaskViewModelFactory>().AsFactory());
+                container.Register(Component.For<IWorkbookViewModelFactory>().AsFactory());
 
-                var taskAutomation = new TaskAutomation(timeManagerRepository, startTaskAction);
+                container.Register(Component.For<TaskAutomation>());
+                container.Register(Component.For<StartTaskAction, ITrayAction>().ImplementedBy<StartTaskAction>());
+                container.Register(Component.For<ViewWorkbookAction, ITrayAction>().ImplementedBy<ViewWorkbookAction>());
+                container.Register(Component.For<Tray>());
+
+                var taskAutomation = container.Resolve<TaskAutomation>();
                 var machineStatusTaskAutomation = new MachineStatusTaskAutomation(taskAutomation);
                 var timeoutTaskAutomation = new TimeoutTaskAutomation(taskAutomation);
-
                 machineStatusTaskAutomation.StartAutomation();
                 timeoutTaskAutomation.StartAutomation();
+
+                var tray = container.Resolve<Tray>();
+
                 Application.Run(tray);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

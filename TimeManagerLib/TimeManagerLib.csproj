@@ -67,9 +67,6 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\Dll\MvvmLight\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="PatternLib">
-      <HintPath>..\Dll\PatternLib\PatternLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -118,6 +115,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\IStartTaskViewModelFactory.cs" />
+    <Compile Include="ViewModel\IWorkbookViewModelFactory.cs" />
     <Compile Include="ViewModel\ProjectViewModel.cs" />
     <Compile Include="ViewModel\StartTaskViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />

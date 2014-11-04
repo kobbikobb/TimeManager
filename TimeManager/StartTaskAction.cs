@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+﻿using System;
+using System.Net.Mime;
 using TimeManagerLib.View;
 using TimeManagerLib.ViewModel;
 
@@ -6,12 +7,14 @@ namespace TimeManager
 {
     public class StartTaskAction : ITrayAction
     {
+        private readonly IStartTaskViewModelFactory startTaskViewModelFactory;
         private WindowView window;
         private StartTaskViewModel lastStartTaskViewModel;
 
-        public StartTaskAction()
+        public StartTaskAction(IStartTaskViewModelFactory startTaskViewModelFactory)
         {
-         
+            if (startTaskViewModelFactory == null) throw new ArgumentNullException("startTaskViewModelFactory");
+            this.startTaskViewModelFactory = startTaskViewModelFactory;
         }
 
         public string Name
@@ -45,7 +48,7 @@ namespace TimeManager
 
         private StartTaskViewModel CreateStartTaskViewModel()
         {
-            var startTaskViewModel = new StartTaskViewModel();
+            var startTaskViewModel = startTaskViewModelFactory.CreateViewModel();
             if (lastStartTaskViewModel != null)
             {
                 if (lastStartTaskViewModel.Project != null)

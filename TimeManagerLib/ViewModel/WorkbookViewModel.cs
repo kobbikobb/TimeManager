@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using Microsoft.Practices.Prism.Commands;
-using PatternLib;
 using TimeManagerLib.Model;
 using TimeManagerLib.ViewModel.Extension;
 
@@ -16,6 +11,8 @@ namespace TimeManagerLib.ViewModel
 {
     public class WorkbookViewModel : ViewModelBase, IRefreashable
     {
+        private readonly ITimeManagerRepository timeManagerRepository;
+
         private enum WorkbookGroupings
         {
             NoGrouping,
@@ -24,8 +21,11 @@ namespace TimeManagerLib.ViewModel
             GroupByCategory
         }
 
-        public WorkbookViewModel()
+        public WorkbookViewModel(ITimeManagerRepository timeManagerRepository)
         {
+            if (timeManagerRepository == null) throw new ArgumentNullException("timeManagerRepository");
+            this.timeManagerRepository = timeManagerRepository;
+
             ShowUncompletedTasks = true;
             ShowCompletedTasks = true;
 
@@ -163,10 +163,8 @@ namespace TimeManagerLib.ViewModel
             {
                 if (Task != null)
                 {
-                    var repository = DependencyResolver.Resolve<ITimeManagerRepository>();
-
                     //TODO: Eyða category og project ef það eru ekki fleiri task á viðkomandi stað
-                    repository.DeleteTask(Task.Task);
+                    timeManagerRepository.DeleteTask(Task.Task);
 
                     Tasks.Remove(Task);
                 }
@@ -181,10 +179,8 @@ namespace TimeManagerLib.ViewModel
 
         public void Refreash()
         {
-            var repository = DependencyResolver.Resolve<ITimeManagerRepository>();
-
-            var tasks = repository.GetAllTasks();
-            var tasksViewModel = tasks.Select(x => new TaskViewModel(x)).ToList();
+            var tasks = timeManagerRepository.GetAllTasks();
+            var tasksViewModel = tasks.Select(x => new TaskViewModel(timeManagerRepository, x)).ToList();
             _tasks = new ListCollectionView(tasksViewModel);
         }
 

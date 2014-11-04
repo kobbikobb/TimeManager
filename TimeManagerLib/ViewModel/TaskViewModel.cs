@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GalaSoft.MvvmLight;
-using PatternLib;
 using TimeManagerLib.Model;
 
 namespace TimeManagerLib.ViewModel
 {
     public class TaskViewModel : ViewModelBase
     {
-        private readonly ITimeManagerRepository _repository;
+        private readonly ITimeManagerRepository timeManagerRepository;
 
         public Task Task { get; private set; }
 
-        public TaskViewModel(Task task)
+        public TaskViewModel(ITimeManagerRepository timeManagerRepository, Task task)
         {
-            Task = task;
+            if (timeManagerRepository == null) throw new ArgumentNullException("timeManagerRepository");
+            this.timeManagerRepository = timeManagerRepository;
 
-            _repository = DependencyResolver.Resolve<ITimeManagerRepository>();
+            Task = task;
         }
 
         private bool _workedHoursSet;
@@ -37,7 +34,7 @@ namespace TimeManagerLib.ViewModel
 
                 SetStartedOrCompleted();
 
-                _repository.SaveTask(Task);
+                timeManagerRepository.SaveTask(Task);
             }
         }
 
@@ -52,7 +49,7 @@ namespace TimeManagerLib.ViewModel
 
                 SetStartedOrCompleted();
 
-                _repository.SaveTask(Task);
+                timeManagerRepository.SaveTask(Task);
             }
         }
 
@@ -91,7 +88,7 @@ namespace TimeManagerLib.ViewModel
 
                 Task.WorkedHours = value;
 
-                _repository.SaveTask(Task);
+                timeManagerRepository.SaveTask(Task);
             }
         }
 
@@ -132,7 +129,7 @@ namespace TimeManagerLib.ViewModel
             {
                 Task.Description = value;
 
-                _repository.SaveTask(Task);
+                timeManagerRepository.SaveTask(Task);
             }
         }
     }

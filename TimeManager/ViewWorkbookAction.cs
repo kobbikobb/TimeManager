@@ -1,11 +1,19 @@
-﻿using TimeManagerLib.View;
+﻿using System;
+using TimeManagerLib.View;
 using TimeManagerLib.ViewModel;
 
 namespace TimeManager
 {
     public class ViewWorkbookAction : ITrayAction
     {
+        private readonly IWorkbookViewModelFactory workbookViewModelFactory;
         private WindowView window;
+
+        public ViewWorkbookAction(IWorkbookViewModelFactory workbookViewModelFactory)
+        {
+            if (workbookViewModelFactory == null) throw new ArgumentNullException("workbookViewModelFactory");
+            this.workbookViewModelFactory = workbookViewModelFactory;
+        }
 
         public string Name
         {
@@ -24,7 +32,7 @@ namespace TimeManager
                 return;
             }
 
-            window.DataContext = new WorkbookViewModel();
+            window.DataContext = workbookViewModelFactory.CreateViewModel();
             window.Show();
             window.Closing += (sender, args) =>
             {
