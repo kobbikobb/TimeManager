@@ -16,6 +16,8 @@ namespace TimeManager.Presentation.ViewModels
         {
             if (timeManagerRepository == null) throw new ArgumentNullException("timeManagerRepository");
             this.timeManagerRepository = timeManagerRepository;
+
+            Started = DateTime.Now.TimeOfDay;
         }
 
         #region Properties

@@ -65,7 +65,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Width="50" Header="Hours" Binding="{Binding WorkedHours}" />
+                <DataGridTextColumn Width="50" Header="Hours" Binding="{Binding WorkedHours, StringFormat=N2}" />
 
                 <DataGridTextColumn Width="90" Header="Project" IsReadOnly="True" 
                                         Binding="{Binding ProjectName}" />

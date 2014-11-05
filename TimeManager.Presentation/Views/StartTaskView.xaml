@@ -59,7 +59,8 @@
                  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0"/>
 
         <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Text="Worked hours:" Margin="0,6,6,0"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Width="40" Text="{Binding WorkedHours}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0" MinWidth="40" />
+        <TextBox Grid.Row="5" Grid.Column="1" Width="40" Text="{Binding WorkedHours, StringFormat=N2}" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0" MinWidth="40" />
 
         <DockPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="0,6,0,0" HorizontalAlignment="Right">
             <Button Content="Save" Width="60" IsDefault="True" 
