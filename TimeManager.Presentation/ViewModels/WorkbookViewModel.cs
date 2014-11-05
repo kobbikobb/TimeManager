@@ -27,49 +27,49 @@ namespace TimeManager.Presentation.ViewModels
             ShowUncompletedTasks = true;
             ShowCompletedTasks = true;
 
-            _currentGrouping = WorkbookGroupings.NoGrouping;
+            currentGrouping = WorkbookGroupings.NoGrouping;
 
             var tasksViewModel = timeManagerRepository.GetAllTasks()
                 .Select(x => new TaskViewModel(timeManagerRepository, x)).ToList();
-            _tasks = new ListCollectionView(tasksViewModel);
+            tasks = new ListCollectionView(tasksViewModel);
         }
 
         #region Properties
 
-        private bool _showCompletedTasks;
+        private bool showCompletedTasks;
         public bool ShowCompletedTasks
         {
-            get { return _showCompletedTasks; }
+            get { return showCompletedTasks; }
             set
             {
-                _showCompletedTasks = value;
+                showCompletedTasks = value;
 
                 RaisePropertyChanged(() => Tasks);
             }
         }
 
-        private bool _showUncompletedTasks;
+        private bool showUncompletedTasks;
         public bool ShowUncompletedTasks
         {
-            get { return _showUncompletedTasks; }
+            get { return showUncompletedTasks; }
             set
             {
-                _showUncompletedTasks = value;
+                showUncompletedTasks = value;
 
                 RaisePropertyChanged(() => Tasks);
             }
         }
 
-        private WorkbookGroupings _currentGrouping;
+        private WorkbookGroupings currentGrouping;
 
         public bool NoGrouping
         {
-            get { return _currentGrouping == WorkbookGroupings.NoGrouping; }
+            get { return currentGrouping == WorkbookGroupings.NoGrouping; }
             set
             {
                 if (value)
                 {
-                    _currentGrouping = WorkbookGroupings.NoGrouping;   
+                    currentGrouping = WorkbookGroupings.NoGrouping;   
                     RaisePropertyChanged(() => Tasks);
                 }
 
@@ -78,13 +78,13 @@ namespace TimeManager.Presentation.ViewModels
 
         public bool GroupByStarted
         {
-            get { return _currentGrouping == WorkbookGroupings.GroupByDayStarted; }
+            get { return currentGrouping == WorkbookGroupings.GroupByDayStarted; }
             set
             {
 
                 if (value)
                 {
-                    _currentGrouping = WorkbookGroupings.GroupByDayStarted;
+                    currentGrouping = WorkbookGroupings.GroupByDayStarted;
                     RaisePropertyChanged(() => Tasks);
                 }
             }
@@ -92,12 +92,12 @@ namespace TimeManager.Presentation.ViewModels
 
         public bool GroupByProject
         {
-            get { return _currentGrouping == WorkbookGroupings.GroupByProject; ; }
+            get { return currentGrouping == WorkbookGroupings.GroupByProject; ; }
             set 
             { 
                 if (value)
                 {
-                    _currentGrouping = WorkbookGroupings.GroupByProject;
+                    currentGrouping = WorkbookGroupings.GroupByProject;
                     RaisePropertyChanged(() => Tasks);
                 }
             }
@@ -105,41 +105,41 @@ namespace TimeManager.Presentation.ViewModels
 
         public bool GroupByCategory
         {
-            get { return _currentGrouping == WorkbookGroupings.GroupByCategory; ; }
+            get { return currentGrouping == WorkbookGroupings.GroupByCategory; ; }
             set
             {
                 if (value)
                 {
-                    _currentGrouping = WorkbookGroupings.GroupByCategory;
+                    currentGrouping = WorkbookGroupings.GroupByCategory;
                     RaisePropertyChanged(() => Tasks);
                 }
             }
         }
 
-        private ListCollectionView _tasks;
+        private ListCollectionView tasks;
         public ListCollectionView Tasks
         {
             get
             {
-                if (_tasks != null)
+                if (tasks != null)
                 {
-                    _tasks.Filter =x => ((TaskViewModel)x).Completed.HasValue && ShowCompletedTasks || !((TaskViewModel)x).Completed.HasValue && ShowUncompletedTasks;
+                    tasks.Filter =x => ((TaskViewModel)x).Completed.HasValue && ShowCompletedTasks || !((TaskViewModel)x).Completed.HasValue && ShowUncompletedTasks;
                     
-                    _tasks.GroupDescriptions.Clear();
+                    tasks.GroupDescriptions.Clear();
                     
                     if(GroupByStarted)
-                        _tasks.GroupDescriptions.Add(new PropertyGroupDescription("DayStartedString"));
+                        tasks.GroupDescriptions.Add(new PropertyGroupDescription("DayStartedString"));
                     else if (GroupByProject)
-                        _tasks.GroupDescriptions.Add(new PropertyGroupDescription("ProjectName"));
+                        tasks.GroupDescriptions.Add(new PropertyGroupDescription("ProjectName"));
                     else if (GroupByCategory)
-                        _tasks.GroupDescriptions.Add(new PropertyGroupDescription("ProjectCategoryName"));
+                        tasks.GroupDescriptions.Add(new PropertyGroupDescription("ProjectCategoryName"));
                 }
 
-                return _tasks;
+                return tasks;
             }
             private set
             {
-                _tasks = value;
+                tasks = value;
                 RaisePropertyChanged(() => Tasks);
             }
 
@@ -163,23 +163,11 @@ namespace TimeManager.Presentation.ViewModels
         {
             if (Task != null)
             {
-                //TODO: Eyða category og project ef það eru ekki fleiri task á viðkomandi stað
                 timeManagerRepository.DeleteTask(Task.Task);
-
                 Tasks.Remove(Task);
             }
         }
 
         #endregion
-
-        public override bool Equals(object obj)
-        {
-            return obj is WorkbookViewModel;
-        }
-
-        public override string ToString()
-        {
-            return "Workbook";
-        }
     }
 }

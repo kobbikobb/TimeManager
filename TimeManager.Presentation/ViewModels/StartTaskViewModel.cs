@@ -11,7 +11,6 @@ namespace TimeManager.Presentation.ViewModels
     public class StartTaskViewModel : ViewModelBase
     {
         private readonly ITimeManagerRepository timeManagerRepository;
-        public Task NewTask { get; private set; }
 
         public StartTaskViewModel(ITimeManagerRepository timeManagerRepository)
         {
@@ -23,45 +22,43 @@ namespace TimeManager.Presentation.ViewModels
 
         public string Description { get; set; }
 
-        private TimeSpan _started;
+        private TimeSpan started;
         public TimeSpan Started
         {
-            get { return _started; }
+            get { return started; }
             set
             {
-                _started = value;
+                started = value;
 
                 RaisePropertyChanged(() => Started);
             }
         }
 
-        private TimeSpan? _completed;
+        private TimeSpan? completed;
         public TimeSpan? Completed
         {
-            get { return _completed; }
+            get { return completed; }
             set
             {
-                _completed = value;
+                completed = value;
 
-                if (_completed.HasValue)
+                if (completed.HasValue)
                 {
-                    var hours = _completed.Value.Subtract(Started).TotalMinutes / 60;
+                    var hours = completed.Value.Subtract(Started).TotalMinutes / 60;
 
                     WorkedHours = (decimal)hours;
                 }
             }
         }
 
-        private decimal _workedHours;
+        private decimal workedHours;
         public decimal WorkedHours
         {
-            get { return _workedHours; }
+            get { return workedHours; }
             set
             {
-                _workedHours = Math.Round(value, 2, MidpointRounding.ToEven);
-
-
-
+                workedHours = value;
+                
                 RaisePropertyChanged(() => WorkedHours);
             }
         }
@@ -70,34 +67,34 @@ namespace TimeManager.Presentation.ViewModels
 
         #region Project
 
-        private List<Project> _projects;
+        private List<Project> projects;
         public List<Project> Projects
         {
             get
             {
-                if(_projects == null)
+                if(projects == null)
                 {
-                    _projects = timeManagerRepository.GetProjects();
+                    projects = timeManagerRepository.GetProjects();
                 }
-               return _projects;
+               return projects;
             }
             set
             {
-                _projects = value;
+                projects = value;
             }
         }
 
-        private Project _project;
+        private Project project;
         public Project Project
         {
-            get { return _project; }
+            get { return project; }
             set
             {
-                _project = value;
+                project = value;
 
-                if (_project != null)
+                if (project != null)
                 {   
-                    Categories = _project.Categories.ToList();
+                    Categories = project.Categories.ToList();
                 }
                 else
                 {
@@ -112,13 +109,13 @@ namespace TimeManager.Presentation.ViewModels
 
         #region Category
 
-        private List<Category> _categories;
+        private List<Category> categories;
         public List<Category> Categories
         {
-            get { return _categories; }
+            get { return categories; }
             set 
             { 
-                _categories = value;
+                categories = value;
                 RaisePropertyChanged(() => Categories);
             }
         }
@@ -129,14 +126,14 @@ namespace TimeManager.Presentation.ViewModels
 
         #endregion
 
-        private ICommand _saveCommand;
+        private ICommand saveCommand;
         public ICommand SaveCommand
         {
             get
             {
-                if (_saveCommand == null)
-                    _saveCommand = new DelegateCommand(Save);
-                return _saveCommand;
+                if (saveCommand == null)
+                    saveCommand = new DelegateCommand(Save);
+                return saveCommand;
             }
         }
 
@@ -171,18 +168,6 @@ namespace TimeManager.Presentation.ViewModels
             task.WorkedHours = WorkedHours;
 
             timeManagerRepository.SaveTask(task);
-
-            NewTask = task;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is StartTaskViewModel;
-        }
-
-        public override string ToString()
-        {
-            return "Start task";
         }
 
         public void SelectProject(decimal id)

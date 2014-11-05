@@ -18,7 +18,7 @@ namespace TimeManager.Presentation.ViewModels
             Task = task;
         }
 
-        private bool _workedHoursSet;
+        private bool workedHoursSet;
 
         public string DayStartedString
         {
@@ -84,7 +84,7 @@ namespace TimeManager.Presentation.ViewModels
             get { return Task.WorkedHours; }
             set
             {
-                _workedHoursSet = true;
+                workedHoursSet = true;
 
                 Task.WorkedHours = value;
 
