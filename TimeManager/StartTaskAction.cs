@@ -42,6 +42,7 @@ namespace TimeManager
                 lastStartTaskViewModel = startTaskViewModel;
             };
             window = null;
+            startTaskViewModelFactory.Release(startTaskViewModel);
         }
 
         private StartTaskViewModel CreateStartTaskViewModel()

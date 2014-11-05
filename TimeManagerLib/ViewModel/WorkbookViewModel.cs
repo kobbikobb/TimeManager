@@ -31,6 +31,8 @@ namespace TimeManagerLib.ViewModel
             ShowCompletedTasks = true;
 
             _currentGrouping = WorkbookGroupings.NoGrouping;
+
+            Refreash();
         }
 
         #region Properties

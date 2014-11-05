@@ -97,9 +97,8 @@ namespace TimeManagerLib.ViewModel
                 _project = value;
 
                 if (_project != null)
-                {
-                    //Here we have to load the project categories
-                    Categories = timeManagerRepository.GetProjectCategories(_project);
+                {   
+                    Categories = _project.Categories.ToList();
                 }
                 else
                 {
@@ -162,10 +161,8 @@ namespace TimeManagerLib.ViewModel
             }
 
             Category.Project = Project;
-            Category.IdProject = Project.Id;
 
             task.Category = Category;
-            task.IdCategory = Category.Id;
             task.Description = Description ?? string.Empty;
             task.Started = DateTime.Today.Add(Started);
 

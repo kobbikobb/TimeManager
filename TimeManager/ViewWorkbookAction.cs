@@ -32,9 +32,11 @@ namespace TimeManager
                 return;
             }
 
-            window.DataContext = workbookViewModelFactory.CreateViewModel();
+            var viewModel = workbookViewModelFactory.CreateViewModel();
+            window.DataContext = viewModel;
             window.ShowDialog();
             window = null;
+            workbookViewModelFactory.Release(viewModel);
 
             //Can use Show and Dispatcher.Run here
         }

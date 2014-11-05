@@ -1,9 +1,15 @@
 ﻿using System;
+using System.IO;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using NHibernate;
+using NHibernate.Tool.hbm2ddl;
 using TimeManager.Core.Repositories;
+using TimeManager.NHibernate;
 using TimeManagerLib.Data;
 using TimeManagerLib.ViewModel;
 using Application = System.Windows.Forms.Application;
@@ -26,7 +32,17 @@ namespace TimeManager
                 container.AddFacility<TypedFactoryFacility>();
                 container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
 
-                container.Register(Component.For<ITimeManagerRepository>().ImplementedBy<TimeManagerRepositoryFake>());
+                AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data"));
+                const string connectionString = @"Data Source=(LocalDB)\v11.0;Integrated Security=True;" + 
+                                                @"AttachDbFileName=|DataDirectory|\TimeManager.mdf";
+                var sessionFactory =   Fluently.Configure()
+                       .Database(MsSqlConfiguration.MsSql2005.ConnectionString(connectionString))
+                       .Mappings(m => m.FluentMappings.AddFromAssemblyOf<TaskMap>())
+                       .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
+                       .BuildSessionFactory();
+
+                container.Register(Component.For<ISession>().UsingFactoryMethod(sessionFactory.OpenSession).LifestyleTransient());
+                container.Register(Component.For<ITimeManagerRepository>().ImplementedBy<TimeManagerRepository>().LifestyleTransient());
 
                 container.Register(Component.For<StartTaskViewModel>().LifestyleTransient());
                 container.Register(Component.For<WorkbookViewModel>().LifestyleTransient());

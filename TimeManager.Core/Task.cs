@@ -4,14 +4,12 @@ namespace TimeManager.Core
 {
     public class Task
     {
-        public decimal Id { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Description { get; set; }
+        public virtual DateTime Started { get; set; }
+        public virtual DateTime? Completed { get; set; }
+        public virtual decimal WorkedHours { get; set; }
 
-        public decimal IdCategory { get; set; }
-        public Category Category { get; set; }
- 
-        public string Description { get; set; }
-        public DateTime Started { get; set; }
-        public DateTime? Completed { get; set; }
-        public decimal WorkedHours { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

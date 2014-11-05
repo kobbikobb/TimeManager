@@ -82,8 +82,17 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.WPF4">
       <HintPath>..\Dll\MvvmLight\GalaSoft.MvvmLight.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.4.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -168,10 +177,22 @@
       <Project>{10aeef40-5c6a-4683-b8cb-f4ea00cb896a}</Project>
       <Name>TimeManager.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TimeManager.NHibernate\TimeManager.NHibernate.csproj">
+      <Project>{46f8b6c4-2b69-4d44-beb4-1bea5a7065d1}</Project>
+      <Name>TimeManager.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TimeManagerLib\TimeManagerLib.csproj">
       <Project>{cf3c1cc1-114c-498c-8686-2cf58cc676fd}</Project>
       <Name>TimeManagerLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\TimeManager.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\TimeManager_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
