@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Threading;
 using TimeManager.Presentation.ViewModels;
 using TimeManager.Presentation.Views;
 
@@ -34,11 +35,13 @@ namespace TimeManager
 
             var viewModel = workbookViewModelFactory.CreateViewModel();
             window.DataContext = viewModel;
-            window.ShowDialog();
-            window = null;
-            workbookViewModelFactory.Release(viewModel);
-
-            //Can use Show and Dispatcher.Run here
+            window.Show();
+            window.Closing += (sender, args) =>
+            {
+                window = null;
+                workbookViewModelFactory.Release(viewModel);
+            };
+            Dispatcher.Run();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Threading;
 using TimeManager.Presentation.ViewModels;
 using TimeManager.Presentation.Views;
 
@@ -36,12 +37,14 @@ namespace TimeManager
             var startTaskViewModel = CreateStartTaskViewModel();
 
             window.DataContext = startTaskViewModel;
-            if(window.ShowDialog() == true)
+            window.Show();
+            window.Closing += (sender, args) =>
             {
                 lastStartTaskViewModel = startTaskViewModel;
+                window = null;
+                startTaskViewModelFactory.Release(startTaskViewModel);
             };
-            window = null;
-            startTaskViewModelFactory.Release(startTaskViewModel);
+            Dispatcher.Run();
         }
 
         private StartTaskViewModel CreateStartTaskViewModel()

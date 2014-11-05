@@ -66,7 +66,8 @@
             <Button Content="Save" Width="60" IsDefault="True" 
                     Behaviors:ButtonBehaviorController.ClosesWindow="True"
                     Behaviors:ButtonBehaviorController.Command="{Binding SaveCommand}"/>
-            <Button Margin="6,0,0,0" Width="60" Content="Cancel" IsCancel="True"/>
+            <Button Margin="6,0,0,0" Width="60" Content="Cancel" IsCancel="True"                    
+                    Behaviors:ButtonBehaviorController.ClosesWindow="True" />
         </DockPanel>
     </Grid>
 </UserControl>

@@ -14,8 +14,7 @@ namespace TimeManager.Presentation.Views.Behaviors
         public string HiddenCommandVerificationText { get; set; }
         public bool HiddenCommandClosesWindow { get; set; }
 
-        public ButtonBehavior(Button button)
-            : base(button)
+        public ButtonBehavior(Button button) : base(button)
         {
             button.Click += ButtonClick;
         }
@@ -42,7 +41,6 @@ namespace TimeManager.Presentation.Views.Behaviors
                 if (HiddenCommandClosesWindow)
                 {
                     var window = GetWindow();
-                    window.DialogResult = true;
                     window.Close();
                 }
 
