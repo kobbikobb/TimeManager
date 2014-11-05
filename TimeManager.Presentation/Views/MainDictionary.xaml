@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:TimeManager.Presentation.Views"
+                    xmlns:vm="clr-namespace:TimeManager.Presentation.ViewModels"
+                    xmlns:views="clr-namespace:TimeManager.Presentation.Views"
+                    xmlns:converters="clr-namespace:TimeManager.Presentation.Views.Converters"
+                    xmlns:viewModels="clr-namespace:TimeManager.Presentation.ViewModels">
+
+    <DataTemplate DataType="{x:Type viewModels:StartTaskViewModel}">
+        <views:StartTaskView />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewModels:WorkbookViewModel}">
+        <views:WorkbookView />
+    </DataTemplate>
+
+
+   <converters:HoursMinutesTimeSpanConverter x:Key="hoursMinutesTimeSpanConverter"/>
+   <converters:DateTimeConverter x:Key="dateTimeConverter"/>
+
+    <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupItem}">
+                    <Expander>
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Margin="6,0,0,0" Text="- Count: "/>
+                                <TextBlock Margin="3,0,0,0" Text="{Binding Path=ItemCount}"/>
+                            </StackPanel>
+                        </Expander.Header>
+                        <ItemsPresenter />
+                    </Expander>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

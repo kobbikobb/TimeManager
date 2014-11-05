@@ -10,8 +10,7 @@ using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using TimeManager.Core.Repositories;
 using TimeManager.NHibernate;
-using TimeManagerLib.Data;
-using TimeManagerLib.ViewModel;
+using TimeManager.Presentation.ViewModels;
 using Application = System.Windows.Forms.Application;
 
 namespace TimeManager

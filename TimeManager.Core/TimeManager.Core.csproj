@@ -40,8 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
-    <Compile Include="DataIntegrityException.cs" />
-    <Compile Include="IRefreashable.cs" />
     <Compile Include="Repositories\ITimeManagerRepository.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

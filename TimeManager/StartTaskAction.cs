@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Net.Mime;
-using TimeManagerLib.View;
-using TimeManagerLib.ViewModel;
+using TimeManager.Presentation.ViewModels;
+using TimeManager.Presentation.Views;
 
 namespace TimeManager
 {

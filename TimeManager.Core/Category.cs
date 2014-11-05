@@ -10,6 +10,11 @@ namespace TimeManager.Core
         public virtual Project Project { get; set; }
         public virtual IList<Task> Tasks { get; set; }
 
+        public Category()
+        {
+            Tasks = new List<Task>();
+        }
+
         public override string ToString()
         {
             return Name;

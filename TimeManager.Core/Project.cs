@@ -9,6 +9,11 @@ namespace TimeManager.Core
 
         public virtual IList<Category> Categories { get; set; }
 
+        public Project()
+        {
+            Categories = new List<Category>();
+        }
+
         public override string ToString()
         {
             return Name;
