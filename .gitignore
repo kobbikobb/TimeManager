@@ -222,3 +222,14 @@ FakesAssemblies/
 /Vefþjónustur/Greidslumidlun/Greidslumidlun.Api/App_Data/XmlDocument.xml
 /Vefþjónustur/Greidslumidlun/Greidslumidlun.Api/XmlDocument.xml
 *.nupkg
+/packages/Castle.Core.3.3.2
+/packages/Castle.Windsor.3.3.0
+/packages/CommonServiceLocator.1.2
+/packages/FluentNHibernate.1.4.0.0
+/packages/Iesi.Collections.3.2.0.4000
+/packages/NHibernate.3.3.4.4000
+/packages/Prism.5.0.0
+/packages/Prism.Composition.5.0.0
+/packages/Prism.Interactivity.5.0.0
+/packages/Prism.Mvvm.1.0.0
+/packages/Prism.PubSubEvents.1.0.0
