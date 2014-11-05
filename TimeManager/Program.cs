@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using System.Windows;
+using System.Windows.Markup;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
@@ -26,6 +29,10 @@ namespace TimeManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //Set the default format for wpf controls to be of the machine default language
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement),
+                new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
             using (var container = new WindsorContainer())
             {
                 container.AddFacility<TypedFactoryFacility>();
@@ -34,7 +41,7 @@ namespace TimeManager
                 AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data"));
                 const string connectionString = @"Data Source=(LocalDB)\v11.0;Integrated Security=True;" + 
                                                 @"AttachDbFileName=|DataDirectory|\TimeManager.mdf";
-                var sessionFactory =   Fluently.Configure()
+                var sessionFactory = Fluently.Configure()
                        .Database(MsSqlConfiguration.MsSql2005.ConnectionString(connectionString))
                        .Mappings(m => m.FluentMappings.AddFromAssemblyOf<TaskMap>())
                        .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
