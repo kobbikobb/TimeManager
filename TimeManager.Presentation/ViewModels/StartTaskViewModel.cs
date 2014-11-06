@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -8,7 +9,7 @@ using TimeManager.Core.Repositories;
 
 namespace TimeManager.Presentation.ViewModels
 {
-    public class StartTaskViewModel : ViewModelBase
+    public class StartTaskViewModel : ViewModelBase, IDataErrorInfo
     {
         private readonly ITimeManagerRepository timeManagerRepository;
 
@@ -134,7 +135,7 @@ namespace TimeManager.Presentation.ViewModels
             get
             {
                 if (saveCommand == null)
-                    saveCommand = new DelegateCommand(Save);
+                    saveCommand = new DelegateCommand(Save, () => Error == null);
                 return saveCommand;
             }
         }
@@ -180,6 +181,37 @@ namespace TimeManager.Presentation.ViewModels
         public void SelectCategory(decimal id)
         {
             Category = Categories.Single(x => x.Id == id);
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "ProjectName")
+                {
+                    if (string.IsNullOrWhiteSpace(ProjectName))
+                        return "Please fill in project name.";
+                }
+                if (columnName == "CategoryName")
+                {
+                    if (string.IsNullOrWhiteSpace(CategoryName))
+                        return "Please fill in category name.";
+                }
+
+                return null;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(ProjectName))
+                    return "Please fill in project name.";
+                if (string.IsNullOrWhiteSpace(CategoryName))
+                    return "Please fill in category name.";
+                return null;
+            }
         }
     }
 }

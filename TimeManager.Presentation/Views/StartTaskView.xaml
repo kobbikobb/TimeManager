@@ -32,13 +32,13 @@
         <ComboBox Grid.Row="0" Grid.Column="1" 
                   DisplayMemberPath="Name"
                   SelectedItem="{Binding Project}"
-                  Text="{Binding ProjectName}"
+                  Text="{Binding ProjectName, ValidatesOnDataErrors=true}"
                   ItemsSource="{Binding Projects}" IsEditable="True" Margin="0,0,0,0"/>
     
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Category:" HorizontalAlignment="Right" Margin="0,6,6,0"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" 
+        <ComboBox Grid.Row="1" Grid.Column="1"
                   DisplayMemberPath="Name" 
-                  Text="{Binding CategoryName}" 
+                  Text="{Binding CategoryName, ValidatesOnDataErrors=true}" 
                   SelectedItem="{Binding Category}" 
                   ItemsSource="{Binding Categories}" IsEditable="True" Margin="0,3,0,0"/>
 
