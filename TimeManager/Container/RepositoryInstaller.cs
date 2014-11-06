@@ -23,7 +23,7 @@ namespace TimeManager.Container
             var sessionFactory = Fluently.Configure()
                    .Database(MsSqlConfiguration.MsSql2005.ConnectionString(connectionString))
                    .Mappings(m => m.FluentMappings.AddFromAssemblyOf<TaskMap>())
-                   .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
+                   .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(true, true))
                    .BuildSessionFactory();
 
             container.Register(Component.For<ISession>().UsingFactoryMethod(sessionFactory.OpenSession).LifestyleTransient());
