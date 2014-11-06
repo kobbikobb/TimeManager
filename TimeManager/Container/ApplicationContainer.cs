@@ -31,8 +31,6 @@ namespace TimeManager.Container
             container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4net.xml"));
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             container.Register(Component.For<LogInterceptor>());
-
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data"));
             
             container.Install(new RepositoryInstaller());
             container.Install(new PresentationInstaller());

@@ -36,6 +36,9 @@ namespace TimeManager
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement),
                 new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
+            SetDataDirectoryToMyDocuments();
+            CopyDatabaseToDataDirectory();
+
             using (var container = new ApplicationContainer())
             {
                 var taskAutomation = container.ResolveTaskAutomation();
@@ -46,6 +49,29 @@ namespace TimeManager
                 timeoutTaskAutomation.StartAutomation();
 
                 Application.Run(container.ResolveTray());
+            }
+        }
+
+        private static void SetDataDirectoryToMyDocuments()
+        { 
+            var dataDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"TimeManager");
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectoryPath);
+        }
+        
+        private static void CopyDatabaseToDataDirectory()
+        {
+            var dataDirectoryPath = (string)AppDomain.CurrentDomain.GetData("DataDirectory");
+   
+            var databasePath = Path.Combine(dataDirectoryPath, "TimeManager.mdf");
+            if (!File.Exists(databasePath))
+            {
+                File.Copy(@"Data\TimeManager.mdf", databasePath);
+            }
+
+            var databaseLogPath = Path.Combine(dataDirectoryPath, "TimeManager_log.ldf");
+            if (!File.Exists(databaseLogPath))
+            {
+                File.Copy(@"Data\TimeManager_log.ldf", databaseLogPath);
             }
         }
     }
