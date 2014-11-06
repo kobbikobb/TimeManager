@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using TimeManager.Core;
 using TimeManager.Core.Repositories;
 
 namespace TimeManager.Presentation.ViewModels
 {
-    public class StartTaskViewModel : ViewModelBase, IDataErrorInfo
+    public class StartTaskViewModel : BindableBase, IDataErrorInfo
     {
         private readonly ITimeManagerRepository timeManagerRepository;
 
@@ -19,8 +19,11 @@ namespace TimeManager.Presentation.ViewModels
             this.timeManagerRepository = timeManagerRepository;
 
             Started = DateTime.Now.TimeOfDay;
-        }
 
+            SaveCommand = new DelegateCommand(Save, () => Error == null);
+            CancelCommand = new DelegateCommand(Cancel);
+        }
+        
         #region Properties
 
         public string Description { get; set; }
@@ -31,9 +34,7 @@ namespace TimeManager.Presentation.ViewModels
             get { return started; }
             set
             {
-                started = value;
-
-                RaisePropertyChanged(() => Started);
+                SetProperty(ref started, value);
             }
         }
 
@@ -43,13 +44,14 @@ namespace TimeManager.Presentation.ViewModels
             get { return completed; }
             set
             {
-                completed = value;
+                SetProperty(ref completed, value);
 
                 if (completed.HasValue)
                 {
                     var hours = completed.Value.Subtract(Started).TotalMinutes / 60;
 
                     WorkedHours = (decimal)hours;
+                    OnPropertyChanged(() => WorkedHours);
                 }
             }
         }
@@ -60,11 +62,13 @@ namespace TimeManager.Presentation.ViewModels
             get { return workedHours; }
             set
             {
-                workedHours = value;
-                
-                RaisePropertyChanged(() => WorkedHours);
+                SetProperty(ref workedHours, value);
             }
         }
+
+        public DelegateCommand SaveCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; private set; }
+        public Action Close { get; set; }
 
         #endregion
 
@@ -81,10 +85,6 @@ namespace TimeManager.Presentation.ViewModels
                 }
                return projects;
             }
-            set
-            {
-                projects = value;
-            }
         }
 
         private Project project;
@@ -93,20 +93,23 @@ namespace TimeManager.Presentation.ViewModels
             get { return project; }
             set
             {
-                project = value;
-
-                if (project != null)
-                {   
-                    Categories = project.Categories.ToList();
-                }
-                else
-                {
-                    Categories = null;
-                }
+                SetProperty(ref project, value);
+                
+                Categories = project != null ? project.Categories.ToList() : null;
+                OnPropertyChanged(() => Categories);
             }
         }
 
-        public string ProjectName { get; set; }
+        private string projectName;
+        public string ProjectName
+        {
+            get { return projectName; }
+            set
+            {
+                SetProperty(ref projectName, value);
+                SaveCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         #endregion
 
@@ -117,29 +120,31 @@ namespace TimeManager.Presentation.ViewModels
         {
             get { return categories; }
             set 
-            { 
-                categories = value;
-                RaisePropertyChanged(() => Categories);
+            {
+                SetProperty(ref categories, value);
             }
         }
 
-        public Category Category { get; set; }
+        private Category category;
+        public Category Category
+        {
+            get { return category; }
+            set { SetProperty(ref category, value); }
+        }
 
-        public string CategoryName { get; set; }
+        private string categoryName;
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
+                SetProperty(ref categoryName, value);
+                SaveCommand.RaiseCanExecuteChanged();                
+            }
+        }
 
         #endregion
-
-        private ICommand saveCommand;
-        public ICommand SaveCommand
-        {
-            get
-            {
-                if (saveCommand == null)
-                    saveCommand = new DelegateCommand(Save, () => Error == null);
-                return saveCommand;
-            }
-        }
-
+        
         private void Save()
         {
             var task = new Task();
@@ -171,8 +176,10 @@ namespace TimeManager.Presentation.ViewModels
             task.WorkedHours = WorkedHours;
 
             timeManagerRepository.SaveTask(task);
-        }
 
+            Close();
+        }
+ 
         public void SelectProject(decimal id)
         {
             Project = Projects.Single(x => x.Id == id);
@@ -182,6 +189,13 @@ namespace TimeManager.Presentation.ViewModels
         {
             Category = Categories.Single(x => x.Id == id);
         }
+
+        private void Cancel()
+        {
+            Close();
+        }
+
+        #region Validation
 
         public string this[string columnName]
         {
@@ -213,5 +227,7 @@ namespace TimeManager.Presentation.ViewModels
                 return null;
             }
         }
+
+        #endregion
     }
 }

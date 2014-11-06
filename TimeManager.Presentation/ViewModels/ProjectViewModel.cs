@@ -1,8 +1,9 @@
-﻿using TimeManager.Core;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using TimeManager.Core;
 
 namespace TimeManager.Presentation.ViewModels
 {
-    public class ProjectViewModel : ViewModelBase
+    public class ProjectViewModel : BindableBase
     {
         public Project Project { get; private set; }
 

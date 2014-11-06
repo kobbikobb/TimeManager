@@ -3,11 +3,12 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using TimeManager.Core.Repositories;
 
 namespace TimeManager.Presentation.ViewModels
 {
-    public class WorkbookViewModel : ViewModelBase
+    public class WorkbookViewModel : BindableBase
     {
         private readonly ITimeManagerRepository timeManagerRepository;
 
@@ -44,7 +45,7 @@ namespace TimeManager.Presentation.ViewModels
             {
                 showCompletedTasks = value;
 
-                RaisePropertyChanged(() => Tasks);
+                OnPropertyChanged(() => Tasks);
             }
         }
 
@@ -56,7 +57,7 @@ namespace TimeManager.Presentation.ViewModels
             {
                 showUncompletedTasks = value;
 
-                RaisePropertyChanged(() => Tasks);
+                OnPropertyChanged(() => Tasks);
             }
         }
 
@@ -69,8 +70,8 @@ namespace TimeManager.Presentation.ViewModels
             {
                 if (value)
                 {
-                    currentGrouping = WorkbookGroupings.NoGrouping;   
-                    RaisePropertyChanged(() => Tasks);
+                    currentGrouping = WorkbookGroupings.NoGrouping;
+                    OnPropertyChanged(() => Tasks);
                 }
 
             }
@@ -85,7 +86,7 @@ namespace TimeManager.Presentation.ViewModels
                 if (value)
                 {
                     currentGrouping = WorkbookGroupings.GroupByDayStarted;
-                    RaisePropertyChanged(() => Tasks);
+                    OnPropertyChanged(() => Tasks);
                 }
             }
         }
@@ -98,7 +99,7 @@ namespace TimeManager.Presentation.ViewModels
                 if (value)
                 {
                     currentGrouping = WorkbookGroupings.GroupByProject;
-                    RaisePropertyChanged(() => Tasks);
+                    OnPropertyChanged(() => Tasks);
                 }
             }
         }
@@ -111,7 +112,7 @@ namespace TimeManager.Presentation.ViewModels
                 if (value)
                 {
                     currentGrouping = WorkbookGroupings.GroupByCategory;
-                    RaisePropertyChanged(() => Tasks);
+                    OnPropertyChanged(() => Tasks);
                 }
             }
         }
@@ -139,8 +140,7 @@ namespace TimeManager.Presentation.ViewModels
             }
             private set
             {
-                tasks = value;
-                RaisePropertyChanged(() => Tasks);
+                SetProperty(ref tasks, value);
             }
 
         }

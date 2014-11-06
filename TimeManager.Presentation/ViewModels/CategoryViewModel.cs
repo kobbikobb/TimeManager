@@ -1,8 +1,9 @@
-﻿using TimeManager.Core;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using TimeManager.Core;
 
 namespace TimeManager.Presentation.ViewModels
 {
-    public class CategoryViewModel : ViewModelBase
+    public class CategoryViewModel : BindableBase
     {
         public Category Category { get; private set; }
 

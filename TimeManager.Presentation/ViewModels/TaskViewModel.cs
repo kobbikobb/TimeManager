@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.Practices.Prism.Mvvm;
 using TimeManager.Core;
 using TimeManager.Core.Repositories;
 
 namespace TimeManager.Presentation.ViewModels
 {
-    public class TaskViewModel : ViewModelBase
+    public class TaskViewModel : BindableBase
     {
         private readonly ITimeManagerRepository timeManagerRepository;
 
@@ -17,8 +18,6 @@ namespace TimeManager.Presentation.ViewModels
 
             Task = task;
         }
-
-        private bool workedHoursSet;
 
         public string DayStartedString
         {
@@ -44,9 +43,8 @@ namespace TimeManager.Presentation.ViewModels
             set
             {
                 Task.Completed = value;
-
-                RaisePropertyChanged(() => Completed);
-
+   
+                OnPropertyChanged(() => Completed);
                 SetStartedOrCompleted();
 
                 timeManagerRepository.SaveTask(Task);
@@ -62,9 +60,8 @@ namespace TimeManager.Presentation.ViewModels
             if (hours > 0)
             {
                 Task.WorkedHours = (decimal)hours;
-                RaisePropertyChanged(() => WorkedHours);
+                OnPropertyChanged(() => WorkedHours);
             }
-            
         }
 
         public bool IsCompleted
@@ -84,8 +81,6 @@ namespace TimeManager.Presentation.ViewModels
             get { return Task.WorkedHours; }
             set
             {
-                workedHoursSet = true;
-
                 Task.WorkedHours = value;
 
                 timeManagerRepository.SaveTask(Task);

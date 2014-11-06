@@ -33,23 +33,9 @@ namespace TimeManager
                 window.Focus();
                 return;
             }
-            
-            var startTaskViewModel = CreateStartTaskViewModel();
 
-            window.DataContext = startTaskViewModel;
-            window.Show();
-            window.Closing += (sender, args) =>
-            {
-                lastStartTaskViewModel = startTaskViewModel;
-                window = null;
-                startTaskViewModelFactory.Release(startTaskViewModel);
-            };
-            Dispatcher.Run();
-        }
-
-        private StartTaskViewModel CreateStartTaskViewModel()
-        {
             var startTaskViewModel = startTaskViewModelFactory.CreateViewModel();
+            startTaskViewModel.Close = () => window.Close();
             if (lastStartTaskViewModel != null)
             {
                 if (lastStartTaskViewModel.Project != null)
@@ -61,7 +47,15 @@ namespace TimeManager
                     startTaskViewModel.SelectCategory(lastStartTaskViewModel.Category.Id);
                 }
             }
-            return startTaskViewModel;
+            window.DataContext = startTaskViewModel;
+            window.Show();
+            window.Closing += (sender, args) =>
+            {
+                lastStartTaskViewModel = startTaskViewModel;
+                window = null;
+                startTaskViewModelFactory.Release(startTaskViewModel);
+            };
+            Dispatcher.Run();
         }
     }
 }

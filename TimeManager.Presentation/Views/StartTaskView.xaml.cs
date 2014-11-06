@@ -12,10 +12,5 @@ namespace TimeManager.Presentation.Views
         {
             InitializeComponent();
         }
-
-        private void TextBlock_GiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-
-        }
     }
 }
